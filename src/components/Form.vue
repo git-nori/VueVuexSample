@@ -4,6 +4,7 @@
     <HeadComp />
     <TextareaComp />
     <StringComp />
+    <button @click="buttonAction">{{ button }}</button>
   </div>
 </template>
 
@@ -11,18 +12,24 @@
 import HeadComp from "@/components/modules/HeadComp";
 import TextareaComp from "@/components/modules/TextareaComp";
 import StringComp from "@/components/modules/StringComp";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "form",
   data() {
     return {
-      msg: "Welcome to Your Vue.js App"
+      msg: "Welcome to Your Vue.js App",
+      button: "check"
     };
   },
   components: {
     HeadComp,
     TextareaComp,
     StringComp
-  }
+  },
+  // mapActions => vuexのactionを使用するために使用
+  methods: mapActions("Form", {
+    buttonAction: "buttonAction"
+  })
 };
 </script>
 
