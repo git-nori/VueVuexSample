@@ -15,12 +15,6 @@ import StringComp from "@/components/modules/StringComp";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "form",
-  data() {
-    return {
-      msg: "Welcome to Your Vue.js App",
-      button: "check"
-    };
-  },
   components: {
     HeadComp,
     TextareaComp,
@@ -29,6 +23,9 @@ export default {
   // mapActions => vuexのactionを使用するために使用
   methods: mapActions("Form", {
     buttonAction: "buttonAction"
+  }),
+  computed: mapGetters("Form", {
+    button: "getButton"
   })
 };
 </script>

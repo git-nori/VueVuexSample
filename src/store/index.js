@@ -6,11 +6,19 @@ Vue.use(Vuex)
 
 const Form = {
     namespaced: true,
-    state: {},
+    state: {
+        button: ["confirm", "check"]
+    },
     mutations: {},
     actions: {
         buttonAction({ commit, state, rootState }) {
             commit('setStepCount', null, { root: true })  // rootへのアクセス
+        }
+    },
+    getters: {
+        getButton(state, getters, rootState) {
+            console.log(state.button[rootState.stepCount])
+            return state.button[rootState.stepCount]  // rootStateのstepCountの値に応じてbutton配列の文字列を返す
         }
     }
 }
