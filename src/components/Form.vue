@@ -1,14 +1,21 @@
 <template>
-  <div>Form page</div>
+  <div>
+    Form page
+    <HeadComp />
+  </div>
 </template>
 
 <script>
+import HeadComp from "@/components/modules/HeadComp";
 export default {
   name: "form",
   data() {
     return {
       msg: "Welcome to Your Vue.js App"
     };
+  },
+  components: {
+    HeadComp
   }
 };
 </script>
