@@ -24,6 +24,7 @@ const Form = {
 }
 
 const Head = {
+    namespaced: true,
     state: {
         title: ['感想を入力', '確認画面', '送信完了']
     },

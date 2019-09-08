@@ -6,7 +6,7 @@
 import { mapGetters } from "vuex";
 export default {
   name: "headComp",
-  computed: mapGetters({
+  computed: mapGetters("Head", {
     title: "getTitle"
   })
 };
