@@ -4,7 +4,7 @@
     <HeadComp />
     <!-- 適切なコンポーネントをisComponentに格納して描写 -->
     <component :is="isComponent"></component>
-    <button @click="buttonAction">{{ button }}</button>
+    <ButtonComp />
   </div>
 </template>
 
@@ -12,22 +12,19 @@
 import HeadComp from "@/components/modules/HeadComp";
 import TextareaComp from "@/components/modules/TextareaComp";
 import StringComp from "@/components/modules/StringComp";
-import { mapActions, mapGetters } from "vuex";
+import ButtonComp from "@/components/modules/ButtonComp";
+import { mapGetters } from "vuex";
 export default {
   name: "form",
+  computed: mapGetters("Form", {
+    isComponent: "getComponent"
+  }),
   components: {
     HeadComp,
     TextareaComp,
-    StringComp
-  },
-  // mapActions => vuexのactionを使用するために使用
-  methods: mapActions("Form", {
-    buttonAction: "buttonAction"
-  }),
-  computed: mapGetters("Form", {
-    button: "getButton",
-    isComponent: "getComponent"
-  })
+    StringComp,
+    ButtonComp
+  }
 };
 </script>
 

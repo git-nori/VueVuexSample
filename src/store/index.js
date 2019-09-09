@@ -7,25 +7,12 @@ Vue.use(Vuex)
 const Form = {
     namespaced: true,
     state: {
-        button: ["confirm", "check"],
         component: ["TextareaComp", "StringComp"]
     },
     mutations: {},
     actions: {
-        buttonAction({ commit, state, rootState }) {
-            // 画面上で入力値が入っている場合
-            if (rootState.errorFlg) {
-                commit('setStepCount', null, { root: true })  // rootへのアクセス
-            }
-            if (rootState.stepCount == 2) {
-                router.push('thanks')  // URLが'/thanks'のページへ遷移(template内に<router-liink to="/thanks">を記述するのと同じ動作)
-            }
-        }
     },
     getters: {
-        getButton(state, getters, rootState) {
-            return state.button[rootState.stepCount]  // rootStateのstepCountの値に応じてbutton配列の文字列を返す
-        },
         getComponent(state, getters, rootState) {
             return state.component[rootState.stepCount]
         }
@@ -71,6 +58,34 @@ const String = {
     }
 }
 
+const Button = {
+    namespaced: true,
+    state: {
+        button: ["confirm", "check", "top page"],
+    },
+    mutations: {},
+    actions: {
+        buttonAction({ commit, state, rootState }) {
+            // 画面上で入力値が入っている場合
+            if (rootState.errorFlg) {
+                commit('setStepCount', null, { root: true })  // rootへのアクセス
+            }
+            if (rootState.stepCount === 2) {
+                router.push('thanks')  // URLが'/thanks'のページへ遷移(template内に<router-liink to="/thanks">を記述するのと同じ動作)
+            }
+            if (rootState.stepCount === 3) {
+                commit('reset', null, { root: true })
+                router.push('/')
+            }
+        }
+    },
+    getters: {
+        getButton(state, getters, rootState) {
+            return state.button[rootState.stepCount]  // rootStateのstepCountの値に応じてbutton配列の文字列を返す
+        }
+    }
+}
+
 export default new Vuex.Store({
     state: {
         stepCount: 0,
@@ -79,8 +94,12 @@ export default new Vuex.Store({
     },
     mutations: {
         setStepCount(state) {
-            console.log('rootsetStepCount')
             state.stepCount++
+        },
+        reset(state) {
+            state.stepCount = 0
+            state.impression = ""
+            state.errorFlg = false
         },
         updateImpression(state, value) {
             state.impression = value
@@ -95,6 +114,7 @@ export default new Vuex.Store({
         Form,
         Head,
         Textarea,
-        String
+        String,
+        Button
     }
 })
