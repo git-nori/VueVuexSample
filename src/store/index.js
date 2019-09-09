@@ -17,6 +17,9 @@ const Form = {
             if (rootState.errorFlg) {
                 commit('setStepCount', null, { root: true })  // rootへのアクセス
             }
+            if (rootState.stepCount == 2) {
+                router.push('thanks')  // URLが'/thanks'のページへ遷移(template内に<router-liink to="/thanks">を記述するのと同じ動作)
+            }
         }
     },
     getters: {
