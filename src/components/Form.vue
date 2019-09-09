@@ -2,8 +2,8 @@
   <div>
     Form page
     <HeadComp />
-    <TextareaComp />
-    <StringComp />
+    <!-- 適切なコンポーネントをisComponentに格納して描写 -->
+    <component :is="isComponent"></component>
     <button @click="buttonAction">{{ button }}</button>
   </div>
 </template>
@@ -25,7 +25,8 @@ export default {
     buttonAction: "buttonAction"
   }),
   computed: mapGetters("Form", {
-    button: "getButton"
+    button: "getButton",
+    isComponent: "getComponent"
   })
 };
 </script>

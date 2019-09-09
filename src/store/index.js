@@ -7,18 +7,24 @@ Vue.use(Vuex)
 const Form = {
     namespaced: true,
     state: {
-        button: ["confirm", "check"]
+        button: ["confirm", "check"],
+        component: ["TextareaComp", "StringComp"]
     },
     mutations: {},
     actions: {
         buttonAction({ commit, state, rootState }) {
-            commit('setStepCount', null, { root: true })  // rootへのアクセス
+            // 画面上で入力値が入っている場合
+            if (rootState.errorFlg) {
+                commit('setStepCount', null, { root: true })  // rootへのアクセス
+            }
         }
     },
     getters: {
         getButton(state, getters, rootState) {
-            console.log(state.button[rootState.stepCount])
             return state.button[rootState.stepCount]  // rootStateのstepCountの値に応じてbutton配列の文字列を返す
+        },
+        getComponent(state, getters, rootState) {
+            return state.component[rootState.stepCount]
         }
     }
 }
@@ -53,6 +59,15 @@ const Textarea = {
     }
 }
 
+const String = {
+    namespaced: true,
+    getters: {
+        getString(state, getters, rootState) {
+            return rootState.impression
+        }
+    }
+}
+
 export default new Vuex.Store({
     state: {
         stepCount: 0,
@@ -76,6 +91,7 @@ export default new Vuex.Store({
     modules: {
         Form,
         Head,
-        Textarea
+        Textarea,
+        String
     }
 })
